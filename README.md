@@ -1,5 +1,5 @@
-# Shallow-Water-Wave
-This is where I store my programs for the course "Computational Methods for Shallow Water Waves" at NTU.
+# Computational Methods for Shallow Water Waves
+This is where I store my programs for the course "Computational Methods for Shallow Water Waves" at NTU, Dept of ESOE.
 
 ## Self-Introduction
 I am Po-Tao Lin, a junior student in the Department of Civil Engineering at NTU
