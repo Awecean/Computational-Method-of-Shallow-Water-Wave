@@ -1,5 +1,5 @@
 # Shallow-Water-Wave
-This is my homework storage space of lesson "Computational Method of Shallow Water Wave" <br/>
+這是用於上傳與紀錄臺大課程〈淺水波的計算方法〉所設置的空間 <br/>
 
 ## 自我介紹
 臺灣大學 土木工程學系大三的學生 B11501037 藺博韜
