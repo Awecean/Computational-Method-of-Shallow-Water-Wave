@@ -1,4 +1,4 @@
-function  y = BC(x,typeset,paratypeset)
+function  y = bc(x,typeset,paratypeset)
 % This function is used to generating ghost cell for match the Boundary
 % Condition, you can input a array and got enough data.
 
@@ -15,9 +15,10 @@ function  y = BC(x,typeset,paratypeset)
         case 'm'
             switch paratypeset
                 case 'u'
+                    %x = wv.bc(x,'nd');
                     y = [-x(3) -x(2) x -x(end-1) -x(end-2)];
-                case 'eta'
-                    y = [x(3) x(2) x x(end-1) x(end-2)];
+                case {'eta', 'h'}
+                    y = [x(3) x(2) x x(end-2) x(end-3)];
                 otherwise
                     disp('wrong value of the typeset of parameter')
             end
