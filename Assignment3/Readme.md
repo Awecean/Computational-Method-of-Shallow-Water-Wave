@@ -16,9 +16,9 @@ graph LR
    F --> |abrupt| H[plota.m]
    F --> |smoothed-abrupt| I[/the requirement/]
 
-   I --> |error analysis| J[plotfsae.m]
+   I --> |error analysis| J[plotsae.m]
    I --> |snapshot| K[plotsas.m]
-   I --> |animation| L[plotfsaa.m]
+   I --> |animation| L[plotsaa.m]
 
 ```
 ## Others
