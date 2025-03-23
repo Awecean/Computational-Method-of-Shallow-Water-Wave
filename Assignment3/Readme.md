@@ -22,5 +22,5 @@ graph LR
 
 ```
 ## Others
-1. the data has generated. Can just run the part 2 of Main.m
+1. the data has generated. Could run the part 2 of Main.m directly.
 
