@@ -1,22 +1,26 @@
-# Instruction of my answer program to Assingment 3
+# Instruction of my program to Assingment 3
+This is a program about using SSP-RK method to numerical approximate the wave propagating in an abrupt bathmetry.
+## Flow-Chart
+```mermaid
+graph LR
+   A[Main]-->B(Part 1: Generating data)
+   A[Main]-->C(Part 2: Making plot)
+   
+   B --> D{bathmetrytype}
+   D -->|flat| E[bathmetrytype.m]
+   D -->|abrupt| E
+   D -->|smoothed-abrupt| E
 
-## Mindflow
-1. Parameter Setting
-   1. Parameters
-   2. Define functions& conditions
-      1. B.C.
-      2. I.C.
-      3. other function set
-   3. With abrupt depth?
-      1. No $\rightarrow$ 2. $\rightarrow$ (save&read data) $\rightarrow$ 3.
-      4. Yes $\rightarrow$ Whether smoothed the abrupt depth?
-         1. No $\rightarrow$ without smoothed process and at end plot Runge's phenomenon<br/> ($\rightarrow$ 2 $\rightarrow$ (save&read data) $\rightarrow$ plot Runge's phenomenon) 
-         2. Yes $\rightarrow$ go afterwards with smoothed process<br/> 
-($\rightarrow$ 2 $\rightarrow$ (save&read data) $\rightarrow$ 3.i) 
-2. Parameter Processing__
-   1. simulation solution
-   2. analytical solution
-   3. error analysis
-3. Plot the Figure 
-   1. Compare analytical solution& simulation solution<br/>(allow user choose different moment)
-   2. error analysis
+   C --> |generating figure store dictionary| F{bathmetrytype}
+   F --> |flat| G[plotfe.m]
+   F --> |abrupt| H[plota.m]
+   F --> |smoothed-abrupt| I{the requirement}
+
+   I --> |error analysis| J[plotfsae.m]
+   I --> |snapshot| K[plotsas.m]
+   I --> |animation| L[plotfsaa.m]
+
+```
+## Others
+1. the data has generated. Can just run the part 2 of Main.m
+
