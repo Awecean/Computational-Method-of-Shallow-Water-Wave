@@ -1,13 +1,13 @@
 # Instruction of my program to Assingment 3
-This is a program about using SSP-RK method to numerical approximate the wave propagating in an abrupt bathmetry.
+This is a program about using SSP-RK method to numerical approximate the wave propagating in an abrupt bathymetry.
 ## Flow Chart
 ```mermaid
 graph LR
    A[Main]-->B(Part 1: Generating data)
    A[Main]-->C(Part 2: Making plot)
    
-   B --> D{bathmetrytype}
-   D -->|flat| E[bathmetrytype.m]
+   B --> D{bathymetrytype}
+   D -->|flat| E[bathymetrytype.m]
    D -->|abrupt| E
    D -->|smoothed-abrupt| E
 
