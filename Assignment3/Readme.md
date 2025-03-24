@@ -11,7 +11,7 @@ graph LR
    D -->|abrupt| E
    D -->|smoothed-abrupt| E
 
-   C --> |generating figure store dictionary| F[/bathmetrytype/]
+   C --> |generating figure store dictionary| F[/bathymetrytype/]
    F --> |flat| G[plotfe.m]
    F --> |abrupt| H[plota.m]
    F --> |smoothed-abrupt| I[/the requirement/]
