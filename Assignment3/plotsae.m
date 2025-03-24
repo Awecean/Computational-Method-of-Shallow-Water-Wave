@@ -68,8 +68,8 @@ loglog([dxlist, 0.12],gerrorcubictrend,'r--','DisplayName','trend','LineWidth',1
 
 set(gcf, 'Color', 'white');
 set(gca, 'XScale', 'log', 'YScale', 'log');
-xlim([1e-2, 2e-1]);
-ylim([3.72e-2, 3.78e-2]);
+xlim([1.5e-2, 1.3e-1]);
+ylim([6.8e-3, 6.86e-3]);
 grid on
 xlabel(sprintf('\\Delta x (m)'));
 ylabel('gloabal error (m)');

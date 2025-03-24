@@ -65,12 +65,12 @@ loglog([0.12,0.12],[gerrorcubictrend(1), gerrorcubictrend(end)],'r--', 'HandleVi
 set(gcf, 'Color', 'white');
 set(gca, 'XScale', 'log', 'YScale', 'log');
 xlim([1e-2, 2e-1]);
-ylim([5e-6, 2e-3]);
+ylim([8e-7, 2.5e-4]);
 grid on
 xlabel(sprintf('\\Delta x (m)'));
 ylabel('gloabal error (m)');
-text(4.5e-2,7e-6,'1','Color','red' );
-text(1.3e-1,7e-5,sprintf('%.2f',k),'Color','red' );
+text(5e-2,1e-6,'1','Color','red' );
+text(1.3e-1,1e-5,sprintf('%.2f',k),'Color','red' );
 
 legend(Location="best")
 exportgraphics(gcf, "figure\Fig1b2.pdf", 'ContentType', 'vector');
