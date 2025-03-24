@@ -2,7 +2,7 @@
 
 %% figure a
 %%% a1:plot (Picture range[Large])
-tss= 11;
+tss= 12;
 load("data\abrupt1.mat")
 figure('Position', [100, 100, 900, 500]);
 set(gcf, 'Color', 'white');
