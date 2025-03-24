@@ -87,14 +87,14 @@ if ~exist(folderPath, 'dir'), mkdir(folderPath); end
 switch baseset
     case 'flat'
         for i = 1:tend
-            gerror(i) =sqrt(dx*sum((etaprimary(i+1,3:end-2)-wv.analyeta(x,h1,h1,i,x0,xs)).^2));
+            gerror(i) =sqrt(1/nx*sum((etaprimary(i+1,3:end-2)-wv.analyeta(x,h1,h1,i,x0,xs)).^2));
         end      
     case 'abrupt'
         save(fullfile(folderPath, sprintf('%s%d.mat',baseset,index)), "index","dx","x","x0","xs","tprimary","tsecondary","etaprimary","etasecondary","h","h1","h2","gerror"); 
 
     case 'abruptsmoothed'
         for i = 1:tend
-            gerror(i) =sqrt(dx*sum((etaprimary(i+1,3:end-2)-wv.analyeta(x,h1,h1,i,x0,xs)).^2));
+            gerror(i) =sqrt(1/nx*sum((etaprimary(i+1,3:end-2)-wv.analyeta(x,h1,h1,i,x0,xs)).^2));
         end 
 end
 save(fullfile(folderPath, sprintf('%s%d.mat',baseset,index)), "index","dx","x","x0","xs","tprimary","tsecondary","etaprimary","etasecondary","h","h1","h2","gerror"); 
