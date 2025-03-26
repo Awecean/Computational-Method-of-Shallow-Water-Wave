@@ -31,9 +31,9 @@ switch baseset
         h(x<=xs) = h1;
         h(x>xs) = h2;
         [~,hidx] = min(abs(x-xs));        
-        %%% take the nearst 15 point to smmoth(hidx is the middest)
+        %%% take the nearst 7 point to smmoth(hidx is the middest)
         s = 50;
-        for i = (hidx-5):(hidx+5)
+        for i = (hidx-3):(hidx+3)
             h(i) = h1-(h1-h2)*(1+tanh(s*(i-(hidx))*dx))/2;            
         end
 end
