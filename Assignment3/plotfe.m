@@ -15,7 +15,7 @@ for index = 1:5
 end
 xlim([14, 14.8])
 ylim([0.027, 0.031])
-legend(Location="best")
+legend(Location="northeast",FontSize=12)
 xlabel(sprintf('x(m)'));
 ylabel(sprintf('\\eta(m)'))
 title(sprintf('the wave at moment t = %d s',tss))
@@ -28,6 +28,8 @@ ylim([0, 0.03])
 exportgraphics(gcf, "figure\Fig1a2.pdf", 'ContentType', 'vector');
 hold off
 %% figure b: plot global error 
+tss = 6;
+
 %%% figrue b1, dx^3
 gerrorlist = zeros(1,5);
 dxlist = zeros(1,5);
@@ -48,7 +50,7 @@ plot([dx3list, 1.1e-3],gerrorlineartrend,'r--','DisplayName','linear trend','Lin
 
 xlabel(sprintf('\\Delta x^3 (m^3)'));
 ylabel('gloabal error (m)');
-legend(location = 'best');
+legend(Location="northwest",FontSize=14)
 exportgraphics(gcf, "figure\Fig1b1.pdf", 'ContentType', 'vector');
 
 
@@ -56,22 +58,27 @@ exportgraphics(gcf, "figure\Fig1b1.pdf", 'ContentType', 'vector');
 figure('Position', [100, 100, 600, 500]);
 loglog(dxlist,gerrorlist,'ko-','DisplayName','data','LineWidth',1.5);
 hold on
-k = log(gerrorlist(2)/gerrorlist(1))/log(dxlist(2)/dxlist(1));
-gerrorcubictrend = gerrorlist(1)*([dxlist, 0.12]/dxlist(1)).^k; 
-loglog([dxlist, 0.12],gerrorcubictrend,'r--','DisplayName','cubic trend','LineWidth',1.5);
-loglog([dxlist(1),0.12],[gerrorcubictrend(1), gerrorcubictrend(1)],'r--', 'HandleVisibility', 'off')
-loglog([0.12,0.12],[gerrorcubictrend(1), gerrorcubictrend(end)],'r--', 'HandleVisibility', 'off')
+loglog([dxlist(1), 0.12], [gerrorlist(1), gerrorlist(1)*(0.12/dxlist(1))^3],'r--','DisplayName','cubic trend','LineWidth',1.5);
+loglog([dxlist(1),0.12],[gerrorlist(1), gerrorlist(1)],'r--', 'HandleVisibility', 'off')
+loglog([0.12,0.12],[gerrorlist(1), gerrorlist(1)*(0.12/dxlist(1))^3],'r--', 'HandleVisibility', 'off')
+
+%this hide program is for plot an asymptote
+%k = log(gerrorlist(2)/gerrorlist(1))/log(dxlist(2)/dxlist(1));
+%gerrortrend = gerrorlist(1)*([dxlist, 0.12]/dxlist(1)).^k; 
+%loglog([dxlist, 0.12],gerrortrend,'r--','DisplayName','trend','LineWidth',1.5);
+%loglog([dxlist(1),0.12],[gerrortrend(1), gerrortrend(1)],'r--', 'HandleVisibility', 'off')
+%loglog([0.12,0.12],[gerrortrend(1), gerrortrend(end)],'r--', 'HandleVisibility', 'off')
 
 set(gcf, 'Color', 'white');
 set(gca, 'XScale', 'log', 'YScale', 'log');
 xlim([1e-2, 2e-1]);
-ylim([8e-7, 2.5e-4]);
+ylim([8e-7, 5e-4]);
 grid on
 xlabel(sprintf('\\Delta x (m)'));
 ylabel('gloabal error (m)');
 text(5e-2,1e-6,'1','Color','red' );
-text(1.3e-1,1e-5,sprintf('%.2f',k),'Color','red' );
+text(1.3e-1,1.5e-5,'3','Color','red' );
 
-legend(Location="best")
+legend(Location="northwest",FontSize=14)
 exportgraphics(gcf, "figure\Fig1b2.pdf", 'ContentType', 'vector');
 hold off

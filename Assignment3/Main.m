@@ -5,27 +5,27 @@
 clear all; close all;
 
 %% Part 1 Parameter setting
-%%% 1.1 data flat-bathmetry generarion 
+%%% 1.1 data flat-bathymetry generarion 
 baseset = 'flat';
 for index = 1:5
-    bathmetry; %generating the data x-step = [0.02*index]m with flat bathmetry       
+    bathymetry; %generating the data x-step = [0.02*index]m with flat bathymetry       
 end
 clear all; % discard unncessary data;
-%%% 1.2 data abrupt-depth-bathmetry generarion
+%%% 1.2 data abrupt-depth-bathymetry generarion
 baseset = 'abrupt'; index = 1; %only create a file x-step =0.02m
-bathmetry;
+bathymetry;
 clear all; % discard unncessary data;
-%%% 1.3 data smoothed abrupt-depth-bathmetry generarion
+%%% 1.3 data smoothed abrupt-depth-bathymetry generarion
 baseset = 'abruptsmoothed';
 for index = 1:5
-    bathmetry; %generating the data x-step = [0.02*index]m      
+    bathymetry; %generating the data x-step = [0.02*index]m      
 end %this file will contain every moment's eta data
 clear all; % discard unncessary data;
 
 %% Part 2 Main Procedure (make plot)
 if ~exist(fullfile(pwd, 'figure'), 'dir'), mkdir(fullfile(pwd, 'figure')); end 
 
-key_abrupt = input('Is the bathmetry has abrupted(yes/no)','s');
+key_abrupt = input('Is the bathymetry has abrupted(yes/no)','s');
 switch key_abrupt
     case 'yes'
         key_smooth = input('smoothed abrupted depth(yes/no)','s');

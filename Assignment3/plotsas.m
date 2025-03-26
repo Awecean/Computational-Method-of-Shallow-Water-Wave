@@ -1,7 +1,7 @@
 %Plot program- [smoothed-abrupt-snapshot]
 
 %% a1:plot (Picture range[Large])
-tss= key_moment;
+tss= 12;
 load("data\abruptsmoothed1.mat")
 figure('Position', [100, 100, 900, 500]);
 set(gcf, 'Color', 'white');
@@ -15,9 +15,9 @@ Hra = max(analysolution(x<xs));
 Hrn = max(analysolution(x<xs));
 Cra = Hra/Hi; Crn = Hrn/Hi; % reflection corfficient
 
-plot(x,analysolution,'r--','DisplayName',sprintf('analytical solution, H_r/H_i = %.3f, H_t/H_i = %.3f',Cra,Cta));
-hold on
 plot(x,etaprimary(tss+1,3:end-2),'b-','DisplayName',sprintf('numerical solution,  H_r/H_i = %.3f, H_t/H_i = %.3f',Crn,Ctn)); 
+hold on
+plot(x,analysolution,'r--','DisplayName',sprintf('analytical solution, H_r/H_i = %.3f, H_t/H_i = %.3f',Cra,Cta));
 plot(x,-h(3:end-2),'o--','DisplayName','smoothed-bathmetry',"MarkerFaceColor","#D95319");
 
 xlim([0, 30])

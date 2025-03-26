@@ -5,31 +5,32 @@
 
 tss = 12;
 load("data\abruptsmoothed1.mat")
-figure('Position', [100, 100, 900, 500]);
+figure('Position', [100, 100, 500, 500]);
 set(gcf, 'Color', 'white');
-plot(x,wv.analyeta(x,h1,h2,tss,x0,xs),'r--','DisplayName','analytical solution');
-hold on
 plot(x,etaprimary(tss+1,3:end-2),'b-','DisplayName','numerical solution'); 
+hold on
+plot(x,wv.analyeta(x,h1,h2,tss,x0,xs),'r--','DisplayName','analytical solution');
 
+xlim([20.5, 23])
+ylim([-0.01 0.045])
+xline(xs,'k--','label',sprintf('x_s = %.2f m',xs),'LabelOrientation','horizontal','LabelVerticalAlignment','middle', 'HandleVisibility', 'off');
+yline(-h1,'k--','label',sprintf('h_1 = %.2f m',h1), 'HandleVisibility', 'off','LabelVerticalAlignment','bottom');
+yline(-h2,'k--','label',sprintf('h_2 = %.2f m',h2), 'HandleVisibility', 'off','LabelVerticalAlignment','bottom');
+legend(Location="best",FontSize=12)
+xlabel(sprintf('x(m)'));
+ylabel(sprintf('\\eta(m)'))
+title(sprintf('the wave at moment t = %d s',tss))
+exportgraphics(gcf, "figure\Fig3a2.pdf", 'ContentType', 'vector');
+
+%%% a2: (Picture range[small])
+
+set(gcf, 'Position', [100, 100, 900, 500]);
 plot(x,-h(3:end-2),'o--','DisplayName','bathmetry',"MarkerFaceColor","#D95319");
 
 xlim([0, 30])
 ylim([-1.2*h1, 0.05])
-xline(xs,'k--','label',sprintf('x_s = %.2f m',xs),'LabelOrientation','horizontal','LabelVerticalAlignment','middle', 'HandleVisibility', 'off');
-yline(-h1,'k--','label',sprintf('h_1 = %.2f m',h1), 'HandleVisibility', 'off','LabelVerticalAlignment','bottom');
-yline(-h2,'k--','label',sprintf('h_2 = %.2f m',h2), 'HandleVisibility', 'off','LabelVerticalAlignment','bottom');
-legend(Location="best")
-xlabel(sprintf('x(m)'));
-ylabel(sprintf('\\eta(m)'))
-title(sprintf('the wave at moment t = %d s',tss))
-exportgraphics(gcf, "figure\Fig3a1.pdf", 'ContentType', 'vector');
 
-%%% a2: (Picture range[small])
-
-set(gcf, 'Position', [100, 100, 500, 500]);
-xlim([20.5, 23])
-ylim([-0.01 0.045])
-exportgraphics(gcf, "figure\Fig3a2.pdf" ,'ContentType', 'vector');
+exportgraphics(gcf, "figure\Fig3a1.pdf" ,'ContentType', 'vector');
 
 %% figure b: the error analysis
 tss = 12;
@@ -45,7 +46,7 @@ for index = 1:5
 end
 xlim([14, 23])
 ylim([0.00, 0.05])
-legend(Location="best")
+legend(Location="best",FontSize=12)
 xlabel(sprintf('x(m)'));
 ylabel(sprintf('\\eta(m)'))
 title(sprintf('the wave at moment t = %d s',tss))
@@ -73,6 +74,6 @@ ylim([6.8e-3, 6.86e-3]);
 grid on
 xlabel(sprintf('\\Delta x (m)'));
 ylabel('gloabal error (m)');
-legend(Location="best")
+legend(Location="best",FontSize=12)
 exportgraphics(gcf, "figure\Fig3c1.pdf", 'ContentType', 'vector');
 hold off
