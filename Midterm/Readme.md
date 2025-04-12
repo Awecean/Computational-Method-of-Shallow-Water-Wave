@@ -4,25 +4,17 @@
 
 This report aims to by 1D-LSWE and SSP-RK numerical scheme simulating a simplified tsunami propagation problem.
 data source of nearshore water depth: https://www.gebco.net/
-## 報告流程
+## FlowChart
 ```mermaid
 graph LR
-   A[Main]-->B(Part 1: Generating data)
-   A[Main]-->C(Part 2: Making plot)
+   A[Main]-->B[/need<Br> animationmode/]
+   B --> C[SW_mid0401.m]
+   C -->|need: 'report**'| D[making plot of bathymetry]
+   C -->|need: 'erroranalysis'| E[SW_mid_2_t.m]
+   C -->|need: '**'| F[making plot someelse]
+   C -->|need: 'animation'<Br> animtionmode: 'yes'| G[making animation]
+
    
-   B --> D{bathymetrytype}
-   D -->|flat| E[bathymetrytype.m]
-   D -->|abrupt| E
-   D -->|smoothed-abrupt| E
-
-   C --> |generating figure store dictionary| F[/bathymetrytype/]
-   F --> |flat| G[plotfe.m]
-   F --> |abrupt| H[plota.m]
-   F --> |smoothed-abrupt| I[/the requirement/]
-
-   I --> |error analysis| J[plotsae.m]
-   I --> |snapshot| K[plotsas.m]
-   I --> |animation| L[plotsaa.m]
 
 ```
 -------------------------------------------------------------------------
