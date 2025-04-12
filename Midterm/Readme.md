@@ -9,9 +9,10 @@ data source of nearshore water depth: https://www.gebco.net/
 (目前覺得這樣比較有故事性)
 
 概述
+$
 \begin{enumerate}
    \item 1
-\end{enumerate}
+\end{enumerate}$
 0. 數值模型說明
 
 1. 什麼是最佳網格解析度(與600s作對比)(之後沿用該解析度)
