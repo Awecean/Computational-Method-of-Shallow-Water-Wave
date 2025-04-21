@@ -44,6 +44,9 @@ region = 'full';
 spaceindex = 1;
 simulate;
 animationeta;
+%% Part 4-4 figure recorded max eta
+bathymetrytype = 'flat'; region = 'full'; spaceindex = 1;
+figuremaxeta;
 % Part 5 other
 %% Part 5-1 initial field with specific bathmetry
 region = 'full';spaceindex = 1;
@@ -56,10 +59,12 @@ bathymetrytype = 'slide'; simulate;
 bathymetrytype = 'abrupt'; simulate;
 bathymetrytype = 'plat'; simulate;
 %% Part 5-3 figure eta field
+bathymetrytype = 'flat'; spaceindex = 1;
+region = 'half';figureeta;
+region = 'quarter';figureeta;
 region = 'full'; spaceindex = 1;
 bathymetrytype = 'slide'; figureeta;
 bathymetrytype = 'abrupt'; figureeta;
 bathymetrytype = 'plat'; figureeta;
-
 %% Part 6 figure sponge-boundary
 figuresponge

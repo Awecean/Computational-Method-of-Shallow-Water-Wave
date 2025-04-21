@@ -27,4 +27,4 @@ for i = 1:3
         'Position',[0,450],'FontSize',12)
 end
 
-exportgraphics(gcf, fullfile("figure",sprintf("Fig41a_etafield%s.pdf",bathymetrytype)), 'ContentType', 'image');
+exportgraphics(gcf, fullfile("figure",sprintf("Fig41a_etafield%s%s.pdf",bathymetrytype,region)), 'ContentType', 'image');
