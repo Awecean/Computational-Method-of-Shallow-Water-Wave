@@ -1,11 +1,11 @@
 bathymetrytype = 'flat'; region = 'full'; spaceindex = 1;
 
 folderPath = fullfile(pwd, 'data');
-load(fullfile(folderPath, sprintf('pdata%s%s%d.mat',bathymetrytype,region,spaceindex)),'eta','X','Y','tlist','Lx','Ly');
+load(fullfile(folderPath, sprintf('pdata%s%s%d.mat',bathymetrytype,region,spaceindex)),'eta_all','tlist_all','X','Y','Lx','Ly');
 %%
-recordmaxeta = zeros(size(eta{1}));
-for i = 1:length(tlist)
-    recordmaxeta = max(recordmaxeta,eta{i}); %take the higher value
+recordmaxeta = zeros(size(eta_all{1}));
+for i = 1:length(tlist_all)
+    recordmaxeta = max(recordmaxeta,eta_all{i}); %take the higher value
 end
 
 figure('Position',[100,100,500,500])
