@@ -1,5 +1,6 @@
 # Instruction of my program to Assingment 4
-This is a program about using SSP-RK method to numerical approximate the wave propagating in open sea (2D-LSWE).
+This is a program about using SSP-RK method to numerical approximate the wave propagating in open sea (2D-LSWE). 
+Can view the animation of simulated result by this link: https://youtu.be/LKiUyCbamHs
 ## Flow Chart
 ```mermaid
 graph LR
