@@ -1,5 +1,3 @@
-bathymetrytype = 'flat'; region = 'full'; spaceindex = 1;
-
 folderPath = fullfile(pwd, 'data');
 load(fullfile(folderPath, sprintf('pdata%s%s%d.mat',bathymetrytype,region,spaceindex)),'eta_all','tlist_all','X','Y','Lx','Ly');
 %%
