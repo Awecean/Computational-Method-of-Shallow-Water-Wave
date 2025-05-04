@@ -20,7 +20,7 @@ legend('Location','best','FontSize',14)
 xlabel('i','FontSize',14)
 ylabel('u_i','FontSize',14)
 hold off
-exportgraphics(gcf, 'Fig1.pdf', 'ContentType', 'vector');
+exportgraphics(gcf, 'Fig2.pdf', 'ContentType', 'vector');
 %%
 u2 = [8, 4, 1, 0, 0,0, 4, 3, 0, -5, -5, 2];
 [u2L, u2R] = wv.muscl(u2);
@@ -38,7 +38,7 @@ legend('Location','best','FontSize',14)
 xlabel('i','FontSize',14)
 ylabel('u_i','FontSize',14)
 hold off
-exportgraphics(gcf, 'Fig2.pdf', 'ContentType', 'vector');
+exportgraphics(gcf, 'Fig3.pdf', 'ContentType', 'vector');
 %%
 disp('----MUSCL reconstruction data1----')
 fprintf('x^+     ');fprintf('%.1f ,',[x1-0.5 x1(end)+0.5]);fprintf('\n');
