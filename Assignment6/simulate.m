@@ -33,11 +33,12 @@ while tnow<tend
     
     if tnow+dt>=t_target(counts)
         dt_temp = t_target(counts)-tnow;
-        fprintf("tnow = %.2f, dt = %.4e\n",tnow, dt_temp)
+        
         [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt, dx, nL);
         eta{counts} = etanow;
         tlist(counts) = tnow;
         tnow = tnow+dt_temp;
+        fprintf("tnow = %.2f, dt = %.4e\n",tnow, dt_temp)
         fprintf('specific time %d arrived\n', counts);
         counts = counts+1;
         
