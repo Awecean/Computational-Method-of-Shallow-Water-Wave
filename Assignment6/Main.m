@@ -25,7 +25,7 @@ plot(x,eta{1}(3:end-2),'kx-','LineWidth',1,'DisplayName','cell-averaged data');
 legend('Location','best','FontSize',14)
 xlabel('x','FontSize',14)
 ylabel('\\eta','FontSize',14)
-hold offeta_temp1 = [eta_temp1(4) eta_temp1(3) eta_temp1(3:end-2) eta_temp1(end-2) eta_temp1(end-3)];
+hold off
 
 %% Part 3-2 Result with specific moments
 %figuretime
