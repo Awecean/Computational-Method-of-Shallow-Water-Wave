@@ -34,7 +34,7 @@ while tnow<tend
     if tnow+dt>=t_target(counts)
         dt_temp = t_target(counts)-tnow;
         
-        [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt, dx, nL);
+        [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt_temp, dx, nL);
         eta{counts} = etanow;
         tlist(counts) = tnow;
         tnow = tnow+dt_temp;
@@ -44,7 +44,7 @@ while tnow<tend
         
     else
         dt_temp = dt;
-        [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt, dx, nL);
+        [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt_temp, dx, nL);
         tnow = tnow+dt_temp;
         if ~isreal(etanow)
             disp('There is complex number');
