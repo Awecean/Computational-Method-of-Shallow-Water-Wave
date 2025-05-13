@@ -21,9 +21,8 @@ function [eta_next, U_next, H_next] = ssprkB(etanow, Unow, h, hp, hm, dt, dx, nL
         H_temp1(i) = H(i)-dt/dx*(F(i+1)-F(i)); %計算temp1時，(ssp-rk)1/3階段後的臨時值H*_i
         HU_temp1(i) = HU(i)-dt/dx*(G(i+1)-G(i))+dt/2/dx*g*etanow(i)*(h(i+1)-h(i-1)); %計算temp1時，(ssp-rk)1/3階段後的臨時值H*_i
     end
-    %fprintf(min(abs(H_temp1)));
     H_temp1 = [H_temp1(4) H_temp1(3) H_temp1(3:end-2) H_temp1(end-2) H_temp1(end-3)]; %引入boundary condition，避免HU./H時出錯
-    HU_temp1 = [HU_temp1(4) HU_temp1(3) H_temp1(3:end-2) HU_temp1(end-2) HU_temp1(end-3)]; %引入boundary condition，避免HU.H時出錯
+    HU_temp1 = [-HU_temp1(4) -HU_temp1(3) HU_temp1(3:end-2) -HU_temp1(end-2) -HU_temp1(end-3)]; %引入boundary condition，避免HU.H時出錯
     eta_temp1 = H_temp1-h; %藉由[H]-h建立eta_temp1
     U_temp1 = HU_temp1./H_temp1; %藉由[HU]./[H]
     % round 2-phase 1 
@@ -39,6 +38,8 @@ function [eta_next, U_next, H_next] = ssprkB(etanow, Unow, h, hp, hm, dt, dx, nL
         HU_temp2(i) = 3/4*HU(i)+1/4*HU_temp1(i)-1/4*dt/dx*...
             (G_temp1(i+1)-G_temp1(i))+dt/8/dx*g*eta_temp1(i)*(h(i+1)-h(i-1));
     end
+    H_temp2 = [H_temp2(4) H_temp2(3) H_temp2(3:end-2) H_temp2(end-2) H_temp2(end-3)]; %引入boundary condition，避免HU./H時出錯
+    HU_temp2 = [-HU_temp2(4) -HU_temp2(3) HU_temp2(3:end-2) -HU_temp2(end-2) -HU_temp2(end-3)]; %引入boundary condition，避免HU.H時出錯
     eta_temp2 = H_temp2-h;
     U_temp2 = HU_temp2./H_temp2;
     % round 3-phase 1
@@ -55,10 +56,10 @@ function [eta_next, U_next, H_next] = ssprkB(etanow, Unow, h, hp, hm, dt, dx, nL
         HU_next(i) = 1/3*HU(i)+2/3*HU_temp2(i)-2/3*dt/dx*...
             (G_temp2(i+1)-G_temp2(i))+dt/3/dx*g*eta_temp2(i)*(h(i+1)-h(i-1));
     end
+    H_next = [H_next(4) H_next(3) H_next(3:end-2) H_next(end-2) H_next(end-3)]; %引入boundary condition，避免HU./H時出錯
+    HU_next = [-HU_next(4) -HU_next(3) HU_next(3:end-2) -HU_next(end-2) -HU_next(end-3)]; %引入boundary condition，避免HU.H時出錯
     % result
     eta_next = H_next-h;
     U_next = HU_next./H_next;
-    %eta_next = [eta_next(4) eta_next(3) eta_next(3:end-2) eta_next(end-2) eta_next(end-3)];
-    H_next = eta_next+h;
 end
 
