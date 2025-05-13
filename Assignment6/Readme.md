@@ -13,33 +13,35 @@
 敬祝 健康平安
 
 ## 主要計算環節各程式說明
-### Main loop
+### Main loop (在simulate.m中的第30行至第55行)
 ```matlab
 while tnow<tend
     u_CFL = max(abs(Unow)+sqrt(g*Hnow));
     dt = C_CFL*dx/u_CFL;
     
-    if tnow+dt>=t_target(counts)
-        dt_temp = t_target(counts)-tnow;
-        
-        [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt_temp, dx, nL);
-        eta{counts} = etanow;
-        tlist(counts) = tnow;
-        tnow = tnow+dt_temp;
-        fprintf("tnow = %.2f, dt = %.4e\n",tnow, dt_temp)
+    if tnow+dt>=t_target(counts) % 判斷下一時刻點是否超過欲紀錄之指定時刻
+        dt_temp = t_target(counts)-tnow; %更改時間步
+        [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt_temp, dx, nL); %將參數輸入ssprk程序
+        eta{counts} = etanow; tlist(counts) = tnow; tnow = tnow+dt_temp; %下一個時刻點
+        fprintf("tnow = %.2f, dt = %.4e\n",tnow, dt_temp);%紀錄是否抵達指定時刻
         fprintf('specific time %d arrived\n', counts);
-        counts = counts+1;
-        
+        counts = counts+1; %使指定時刻點的指標+1        
     else
         dt_temp = dt;
         [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt_temp, dx, nL);
         tnow = tnow+dt_temp;
-        if ~isreal(etanow)
+        if ~isreal(etanow) %若有複數，則中斷程式
             disp('There is complex number');
             break;
         end
     end
     allcount = allcount+1;
 end
-
 ```
+### ssprkB.m (是ssprk程式，但因為有多個版本，所以暫時以ssprkB作為名稱)
+重複進行以下5個步驟3輪次
+1. boundary condition of eta and U (使用鏡面邊界)
+2. 使用hllc計算F, G
+3. 計算ssprk各階段
+4. 對HU, H引入boundary condition(HU同u, H同eta)
+5. 計算eta = H-h; U = HU./H
