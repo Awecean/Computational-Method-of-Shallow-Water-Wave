@@ -6,7 +6,7 @@ clear; close all;
 
 %% Part 1 MUSCL reconstruction
 u1 = [0,0,1,4,-4,0,0,5,4,2,-1,2];
-[u1L, u1R] = wv.muscl(u1);
+[u1L, u1R] = wv.muscl(u1); % By muscl to establish u1^+_{i-1/2} and u1^-_{i-1/2} 
 x1 = 1:1:length(u1);
 figure('Position',[100,100,800,400])
 set(gcf,'Color','white')
@@ -14,7 +14,7 @@ plot(x1,u1,'kx-','LineWidth',1,'DisplayName','cell-averaged data');
 hold on
 scatter(x1-1/2,u1R,'red','Marker','>','LineWidth',1,...
     'DisplayName','reconstructed from the left')
-scatter(x1+1/2,u1L,'blue','Marker','<','LineWidth',1,...
+scatter(x1-1/2,u1L,'blue','Marker','<','LineWidth',1,...
     'DisplayName','reconstructed from the right')
 axis([min(x1)-1, max(x1)+1, min([u1,u1R,u1L])-1, max([u1,u1R,u1L])+1]);
 legend('Location','best','FontSize',14)
