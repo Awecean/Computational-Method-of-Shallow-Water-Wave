@@ -57,6 +57,6 @@ function [eta_next, U_next, H_next] = ssprkB(etanow, Unow, h, hp, hm, dt, dx, nL
     eta_next = H_next-h;
     U_next = HU_next./H_next;
     %eta_next = [eta_next(4) eta_next(3) eta_next(3:end-2) eta_next(end-2) eta_next(end-3)];
-    %H_next = eta_next+h;
+    H_next = eta_next+h;
 end
 
