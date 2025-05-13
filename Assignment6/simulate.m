@@ -23,12 +23,12 @@ tlist_all = [];
 allcount = 0;
 disp('ok')
 %%
-u_CFL = max(abs(Unow)+real(sqrt(g*Hnow)));
+u_CFL = max(abs(Unow)+sqrt(g*Hnow));
 dt = C_CFL*dx/u_CFL;
 sprintf('%.3c', u_CFL);
 %%
 while tnow<tend
-    u_CFL = max(abs(Unow)+g*Hnow);
+    u_CFL = max(abs(Unow)+sqrt(g*Hnow));
     dt = C_CFL*dx/u_CFL;
     
     if tnow+dt>=t_target(counts)
