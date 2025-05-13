@@ -2,8 +2,8 @@ function [F, G] = hllc(etam, etap, Um, Up, hm, hp,h)
     % HLLC(Harten-Lax-van Leer contact) approximation Rieman solver
     % -----------------------
     % Input:
-    % etam, etap. The free water height of minus(i+1/2), plus(i-1/2);
-    % Um, Up. The wave velocity of minus(i+1/2), plus(i-1/2);
+    % etam, etap. The free water height of minus(i-1/2), plus(i-1/2);
+    % Um, Up. The wave velocity of minus(i-1/2), plus(i-1/2);
     % h. The water depth of bathymery
     % -----------------------
     % OUput:
