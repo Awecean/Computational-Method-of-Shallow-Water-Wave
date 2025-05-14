@@ -14,8 +14,7 @@ flowchart LR
     D -->|animation| D4[animation_NSWE.m]
 ```
 ## Others
-## 主要計算環節各程式說明
-### Main loop (在simulate.m中的第30行至第55行)
+### Main loop (In simulate_****.m)
 ```matlab
 while tnow<tend
     u_CFL = max(abs(Unow)+sqrt(g*Hnow));
