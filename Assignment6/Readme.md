@@ -4,10 +4,10 @@ This is the programs to solve the problem of Assignment 6, By use the "Main.m" p
 ```mermaid
 flowchart LR
     A[Main.m] -->|Initial Data| B(initial parameter.m)
-    B -->C{Simulate}
+    A -->C{Simulate}
     C -->|NSWE| C1[simulate_NSWE.m]
     C -->|LSWE| C2[simulate_LSWE.m]
-    B --> D{Visulization}
+    A --> D{Visulization}
     D -->|grid size| D1[figuregrid.m]
     D -->|moment| D2[figuremoment.m]
     D -->|algorithm| D3[figurealgorithm.m]
