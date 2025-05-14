@@ -24,8 +24,8 @@ while tnow<tend
         dt_temp = t_target(counts)-tnow; %更改時間步
         [etanow, Unow, Hnow] = wv.ssprkB(etanow, Unow, h, hp, hm, dt_temp, dx, nL); %將參數輸入ssprk程序
         eta{counts} = etanow; tlist(counts) = tnow; tnow = tnow+dt_temp; %下一個時刻點
-        fprintf("tnow = %.2f, dt = %.4e\n",tnow, dt_temp);%紀錄是否抵達指定時刻
-        fprintf('specific time %d arrived\n', counts);
+        %fprintf("tnow = %.2f, dt = %.4e\n",tnow, dt_temp);%紀錄是否抵達指定時刻
+        %fprintf('specific time %d arrived\n', counts);
         counts = counts+1; %使指定時刻點的指標+1        
     else
         dt_temp = dt;
