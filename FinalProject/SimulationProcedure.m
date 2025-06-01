@@ -16,11 +16,8 @@ y = y*111*10^3; %換成m
 
 fprintf('%d,%d\n',size(cloudset));
 
-%% examine the data read doiesn't wrong
-figure
-surf(cloudset{1,5}+cloudset{9,6});
-shading interp
-%%
+
+%% Parameter settings
 % 環境&初始條件
 bathy = data1.bathy; % 水深
 
@@ -44,7 +41,7 @@ V_c = data3.V_coeff;
 t_save = 0:50:4000;
 CFL = 0.9;  %test1=>0.9
 disp('finish setting')
-%%
+%% This part is for run massive initial data
 disp('start_compute')
 
 sensor_nx = size(cloudset,1); sensor_ny = size(cloudset, 2);
@@ -90,4 +87,16 @@ for i = 5:sensor_nx
     end
 end
 
+%% This part is for run PI data(Propable initial data)
+numWorkers = 4;
+if ~isempty(gcp('nocreate'))
+    delete(gcp('nocreate'))
+end
+parpool(numWorkers);
+disp('numWorkers');
+
+load('PI.mat','PI');  % 初始水體
+eta0 = PI;
+[~,~,eta_s,~,~] = SWf_2Dssprk(dx,dy,x,y,t_save,-bathy,CFL,eta0,U0,V0,eta_c,U_c,V_c);
+save('eta_generationPI.mat','eta_s')
 
