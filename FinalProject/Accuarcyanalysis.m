@@ -60,17 +60,17 @@ for i = 1:7
     plot(data_cell{i}(1,:), data_cell{i}(2,:), 'b.-'); % 原始資料
     hold on
     x = data_cell{i}(1,:);    y = data_cell{i}(2,:);
-    valid_idx = isfinite(x) & isfinite(y);
-    x = x(valid_idx); y = y(valid_idx);
-    eta_temp = interp1(x,y,t,'linear');
-    H = SV(PIresult(i,:),eta_temp); % change this line
-    disp(H)
+     [VRvalue, RMSE] = VR(PIresult(i,:),0:50:4000, data_cell{i}(2,:), data_cell{i}(1,:))
+    %x = x(valid_idx); y = y(valid_idx);
+    %eta_temp = interp1(x,y,t,'linear');
+    %H = SV(PIresult(i,:),eta_temp); % change this line
+    %disp(H)
     plot(t,PIresult(i,:),'r.-')
     %plot(t, eta_temp, 'g.-'); % 插值後
     title(sprintf('%s', station_names{i}));
     xlabel('t (s)');
     ylabel('\eta (m)');
-    text(3000,max(eta_temp)-0.5,sprintf('%.2f %%',H*100));
+    text(3000,max(eta_temp)-0.5,sprintf('%.2f %%',VRvalue*100));
     if i ==6; legend('Original data', 'Interpolated','Location','south'); end
 
 end
