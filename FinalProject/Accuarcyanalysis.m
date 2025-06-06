@@ -70,7 +70,12 @@ for i = 1:7
     title(sprintf('%s', station_names{i}));
     xlabel('t (s)');
     ylabel('\eta (m)');
-    text(3000,max(eta_temp)-0.5,sprintf('%.2f %%',VRvalue*100));
+    stats_text = sprintf('VR = %.1f %%\nRMSE = %.3f m', VR, RMSE);
+    text(2000, -6, stats_text, ...
+    'BackgroundColor', 'white', ...
+    'EdgeColor', 'black', ...
+    'Margin', 5, ...
+    'FontSize', 10);
     if i ==6; legend('Original data', 'Interpolated','Location','south'); end
 
 end
