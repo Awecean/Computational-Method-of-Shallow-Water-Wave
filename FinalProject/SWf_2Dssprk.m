@@ -1,7 +1,7 @@
 %% ===== sspRK2DH_2 (for 2DH_Sponge boundary) ===== %%
 % 存特定時間的瞬照圖，Sponge boundary
 
-function [X,Y,eta_s,U_s,V_s] = SWf_2Dssprk(dx,dy,x,y,t_save,h,CFL,eta0,U0,V0,eta_c,U_c,V_c)
+function [X,Y,eta_s,U_s,V_s,eta_max] = SWf_2Dssprk(dx,dy,x,y,t_save,h,CFL,eta0,U0,V0,eta_c,U_c,V_c)
 
 % 基本參數
 g = 9.81;
@@ -14,6 +14,7 @@ g = 9.81;
 % 初始化設定：需"儲存"之時間點的矩陣
 Nt = length(t_save);  % 時間儲存步數
 eta_s = zeros(length(y), length(x), Nt);  % 儲存波高的 3D 矩陣
+eta_max = zeros(length(y), length(x)); % the martix store the max wave height.
 U_s   = zeros(length(y), length(x), Nt);  % 儲存 u 速度場
 V_s   = zeros(length(y), length(x), Nt);  % 儲存 v 速度場
 % 第一層時間 t=0 的波形與速度
@@ -73,6 +74,7 @@ while t_now < t_save(end)
 
     % 進入下一回圈
     t_now = t_now + dt;
+    eta_max = max(eta, eta_max);
 end
 
 end

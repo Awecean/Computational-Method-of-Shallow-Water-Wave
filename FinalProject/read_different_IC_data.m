@@ -8,7 +8,7 @@ load('bathymetry_MATLAB.mat','X','Y','bathy');
 X = X*90e3; Y = Y*111e3;
 %% The inteplated data of moment
 % by read the data from the stations to get the target djdata
-eta_station = zeros(1,28);
+eta_station = zeros(1,427);
 t = 0:50:4000;
 figure('Position',[100,100,1200,600])
 set(gcf,'Color','White')
@@ -21,12 +21,10 @@ for i = 1:7
     valid_idx = isfinite(x) & isfinite(y);
     x = x(valid_idx); y = y(valid_idx);
     eta_temp = interp1(x,y,t,'linear');
-
-    eta_station(i) = interp1(x,y,500, 'linear');
-    eta_station(i+7) = interp1(x,y,1500, 'linear');
-    eta_station(i+14) = interp1(x,y,2500, 'linear');
-    eta_station(i+21) = interp1(x,y,3500, 'linear');
-
+    
+    for j = 1:61 % fit the data t = 500 to 3500 every 50s 
+        eta_station(i+7*(j-1)) = interp1(x,y,500+(j-1)*50,'linear');
+    end
     plot(t, eta_temp, 'r.-'); % 插值後
     if i ==6; legend('Original data', 'Interpolated'); end
     title(sprintf('%s', station_names{i}));
@@ -36,14 +34,13 @@ end
 exportgraphics(gcf, 'Inteploationmoment.pdf', 'ContentType', 'image');
 %% The inteploated data of position
 % interp the elevation data via different initial condition setting
-nx = 10; ny = 8;
 ICresult = zeros(68,28);
 count = 1;
 for i = 1:3
     for j = 1:4
         load(['newdata\simulated_' sprintf('%d_%d.mat',i,j)]);
-        for k = 1:4
-            temp = cellresult(:,:,20*(k-1)+11); % the field value of each moment
+        for k = 1:61
+            temp = cellresult(:,:,1*(k-1)+11); % the field value of each moment
             ICresult(count, 1+7*(k-1):7*k) = interp2(X,Y,temp,sensor_lons_in_m,sensor_lats_in_m);
         end
         fprintf('now end read of %d %d\n',i,j);
@@ -51,11 +48,11 @@ for i = 1:3
     end
 end
 
-for i = 4:nx
-    for j = 1:ny
+for i = 4:10
+    for j = 1:8
         load(['newdata\simulated_' sprintf('%d_%d.mat',i,j)]);
-        for k = 1:4
-            temp = cellresult(:,:,20*(k-1)+11); % the field value of each moment
+        for k = 1:61
+            temp = cellresult(:,:,1*(k-1)+11); % the field value of each moment
             ICresult(count, 1+7*(k-1):7*k) = interp2(X,Y,temp,sensor_lons_in_m,sensor_lats_in_m);
         end
         fprintf('now end read of %d %d\n',i,j);
@@ -92,5 +89,4 @@ xlabel('Longitude $^\circ E $','Interpreter','latex')
 ylabel('Latitude $^\circ N$ ','Interpreter','latex')
 contour(X/90e3,Y/111e3,bathy,[0 0],'k-');
 exportgraphics(gcf, 'PropableIC.pdf', 'ContentType', 'image');
-
 

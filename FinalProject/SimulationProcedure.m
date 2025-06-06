@@ -3,7 +3,7 @@
 %%  地形圖與初始水體
 close all
 clear
-%% 讀取數據
+%% 讀取數據 and Parameter settings
 data1 = load('bathymetry_MATLAB.mat', 'X','Y','bathy','label');  % 地形
 load('initialcompose.mat','cloudset');  % 初始水體
 data3 = load('useCoeffs1km.mat', 'eta_coeff', 'U_coeff', 'V_coeff'); % 衰減係數
@@ -17,9 +17,12 @@ y = y*111*10^3; %換成m
 fprintf('%d,%d\n',size(cloudset));
 
 
-%% Parameter settings
+
 % 環境&初始條件
 bathy = data1.bathy; % 水深
+bathy_n = data1.bathy;
+bathy_n(bathy_n >= -1) = -1; % set the land region(depth lower than 1m) = -1;
+
 
 
 %eta0 = data2.eta0;   % 初始水面位移量
@@ -55,7 +58,7 @@ parpool(numWorkers);
 disp('numWorkers');
 
 
-for i = 5:sensor_nx
+for i = 1:sensor_nx
     tempresult = cell(1,sensor_ny);
     tic;
     parfor j = 1:sensor_ny
@@ -67,7 +70,7 @@ for i = 5:sensor_nx
         eta0 = cloudset{i,j};
     
         % 執行模擬
-        [~,~,eta_s,~,~] = SWf_2Dssprk(dx,dy,x,y,t_save,-bathy,CFL,eta0,U0,V0,eta_c,U_c,V_c);
+        [~,~,eta_s,~,~,~] = SWf_2Dssprk(dx,dy,x,y,t_save,-bathy_n,CFL,eta0,U0,V0,eta_c,U_c,V_c);
           
         % 儲存 eta_s
         disp('------------------------------')
@@ -97,6 +100,6 @@ disp('numWorkers');
 
 load('PI.mat','PI');  % 初始水體
 eta0 = PI;
-[~,~,eta_s,~,~] = SWf_2Dssprk(dx,dy,x,y,t_save,-bathy,CFL,eta0,U0,V0,eta_c,U_c,V_c);
-save('eta_generationPI.mat','eta_s')
+[~,~,eta_s,~,~,eta_max] = SWf_2Dssprk(dx,dy,x,y,t_save,-bathy,CFL,eta0,U0,V0,eta_c,U_c,V_c);
+save('eta_generationPI.mat','eta_s','eta_max')
 

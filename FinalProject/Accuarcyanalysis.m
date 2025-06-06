@@ -52,32 +52,28 @@ for i  = 1:nt
 end
 PIresult = PIresult.';
 %%
-figure('Position',[100,100,1200,600])
+blocklocationx = [3000,3000,3000,3000,3000,3000,3000];
+blocklocationy = [-4,-4,-4,-4,-4,-4,-4,-4]; 
+figure('Position',[100,100,1500,900])
 set(gcf,'Color','White')
 g = tiledlayout(2,4);
 for i = 1:7
     nexttile;
-    plot(data_cell{i}(1,:), data_cell{i}(2,:), 'b.-'); % 原始資料
+    plot(data_cell{i}(1,:), data_cell{i}(2,:), 'ko-'); % 原始資料
     hold on
     x = data_cell{i}(1,:);    y = data_cell{i}(2,:);
-     [VRvalue, RMSE] = VR(PIresult(i,:),0:50:4000, data_cell{i}(2,:), data_cell{i}(1,:))
-    %x = x(valid_idx); y = y(valid_idx);
-    %eta_temp = interp1(x,y,t,'linear');
-    %H = SV(PIresult(i,:),eta_temp); % change this line
-    %disp(H)
+     [VRvalue, RMSE] = VR(PIresult(i,:),0:50:4000, data_cell{i}(2,:), data_cell{i}(1,:));
     plot(t,PIresult(i,:),'r.-')
-    %plot(t, eta_temp, 'g.-'); % 插值後
     title(sprintf('%s', station_names{i}));
     xlabel('t (s)');
     ylabel('\eta (m)');
-    stats_text = sprintf('VR = %.1f %%\nRMSE = %.3f m', VR, RMSE);
+    ylim([-8,8]);
+    stats_text = sprintf('VR = %.1f %%\nRMSE = %.3f m', VRvalue*100, RMSE);
     text(2000, -6, stats_text, ...
     'BackgroundColor', 'white', ...
     'EdgeColor', 'black', ...
-    'Margin', 5, ...
+    'Margin', 3, ...
     'FontSize', 10);
-    if i ==6; legend('Original data', 'Interpolated','Location','south'); end
-
+    legend('Original data', 'Interpolated','Location','northeast');
 end
 exportgraphics(gcf, 'Result.pdf', 'ContentType', 'image');
-

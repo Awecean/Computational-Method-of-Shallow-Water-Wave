@@ -10,7 +10,11 @@ figure('Position',[50,50,800,700])
 set(gcf,'Color','White')
 lat = X; lon = Y;
 lat_in_m = 90e3*X; lon_in_m = 111e3*Y;
-pcolor(lat, lon, bathy);
+bathy_mask = bathy>0;
+bathy_ocean = bathy;
+bathy_ocean(bathy_mask) = NaN;
+
+pcolor(lat, lon, bathy_ocean);
 
 hold on
 
